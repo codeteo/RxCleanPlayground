@@ -1,7 +1,9 @@
-package css.rxclean.rxcleanplayground;
+package css.rxclean.rxcleanplayground.main;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import css.rxclean.rxcleanplayground.R;
 
 public class MainActivity extends AppCompatActivity {
 

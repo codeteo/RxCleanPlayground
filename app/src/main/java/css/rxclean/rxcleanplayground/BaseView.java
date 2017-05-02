@@ -7,6 +7,4 @@ package css.rxclean.rxcleanplayground;
 
 public interface BaseView<T> {
 
-    void setPresenter(T presenter);
-
 }
