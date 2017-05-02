@@ -1,5 +1,7 @@
 package css.rxclean.rxcleanplayground.main;
 
+import css.rxclean.rxcleanplayground.utils.schedulers.BaseSchedulerProvider;
+import css.rxclean.rxcleanplayground.utils.schedulers.SchedulerProvider;
 import dagger.Module;
 import dagger.Provides;
 
@@ -19,6 +21,11 @@ class MainModule {
     @Provides
     MainMVP.View provideMainMVPView(){
         return view;
+    }
+
+    @Provides
+    BaseSchedulerProvider baseSchedulerProvider() {
+        return SchedulerProvider.getInstance();
     }
 
 }

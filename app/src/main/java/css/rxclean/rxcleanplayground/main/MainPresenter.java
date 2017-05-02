@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
+import css.rxclean.rxcleanplayground.utils.schedulers.BaseSchedulerProvider;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -12,14 +13,19 @@ import rx.subscriptions.CompositeSubscription;
 
 class MainPresenter implements MainMVP.Presenter {
 
-    private MainMVP.View view;
+    @NonNull
+    private final MainMVP.View view;
+
+    @NonNull
+    private final BaseSchedulerProvider schedulerProvider;
 
     @NonNull
     private CompositeSubscription subscriptions;
 
     @Inject
-    MainPresenter(MainMVP.View view) {
+    MainPresenter(@NonNull MainMVP.View view, @NonNull BaseSchedulerProvider schedulerProvider) {
         this.view = view;
+        this.schedulerProvider = schedulerProvider;
 
         subscriptions = new CompositeSubscription();
     }
