@@ -3,10 +3,10 @@ package css.rxclean.rxcleanplayground.main;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +25,7 @@ import css.rxclean.rxcleanplayground.data.User;
 public class MainFragment extends Fragment implements MainMVP.View {
 
     @BindView(R.id.tv_main_fragment_user) TextView tvUser;
+    @BindView(R.id.btn_main_fragment_retry) Button btnRetry;
 
     @Inject
     MainPresenter mainPresenter;
@@ -82,6 +83,18 @@ public class MainFragment extends Fragment implements MainMVP.View {
     @Override
     public void showError() {
         Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void enableRetryButton() {
+        btnRetry.setVisibility(View.VISIBLE);
+        btnRetry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainPresenter.retryRequest();
+                btnRetry.setVisibility(View.GONE);
+            }
+        });
     }
 
 }

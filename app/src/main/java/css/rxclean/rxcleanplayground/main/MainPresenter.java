@@ -1,7 +1,6 @@
 package css.rxclean.rxcleanplayground.main;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -64,6 +63,7 @@ class MainPresenter implements MainMVP.Presenter {
                     @Override
                     public void onError(Throwable e) {
                         view.showError();
+                        view.enableRetryButton();
                     }
 
                     @Override

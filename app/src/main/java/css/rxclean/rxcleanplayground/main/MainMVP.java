@@ -16,6 +16,8 @@ interface MainMVP {
 
         void showError();
 
+        void enableRetryButton();
+
     }
 
     interface Presenter extends BasePresenter {
