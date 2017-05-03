@@ -1,6 +1,7 @@
 package css.rxclean.rxcleanplayground;
 
 import android.app.Application;
+import android.util.Log;
 
 /**
  * Application class builds and provides Dagger Components with Application scope.
@@ -24,6 +25,8 @@ public class MyApplication extends Application {
                 .networkModule(new NetworkModule())
                 .build();
 
+
+        Log.i("APPLI", "onCreate META TO BUILD");
     }
 
     public static ApplicationComponent getApplicationComponent() {

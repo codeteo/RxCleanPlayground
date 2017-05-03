@@ -3,6 +3,7 @@ package css.rxclean.rxcleanplayground.main;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,9 +36,12 @@ public class MainFragment extends Fragment implements MainMVP.View {
         super.onCreate(savedInstanceState);
 
         if (mainPresenter == null) {
+
             DaggerMainComponent.builder()
                     .networkComponent(MyApplication.getNetworkComponent())
-                    .build();
+                    .mainModule(new MainModule(this))
+                    .build()
+                    .inject(this);
         }
 
     }
