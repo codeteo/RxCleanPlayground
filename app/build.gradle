@@ -26,6 +26,7 @@ final SUPPORT_VERSION = '25.3.0'
 final RETROFIT_VERSION = '2.1.0'
 final RXJAVA_VERSION = '1.2.4'
 final RXANDROID_VERSION = '1.2.1'
+final BUTTERKNIFE_VERSION = '8.5.1'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -39,6 +40,8 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
     provided 'javax.annotation:jsr250-api:1.0'
     compile 'joda-time:joda-time:2.9.7'
+    compile "com.jakewharton:butterknife:${BUTTERKNIFE_VERSION}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTERKNIFE_VERSION}"
 
     // Espresso
     androidTestCompile("com.android.support.test.espresso:espresso-core:${ESPRESSO_VERSION}", {

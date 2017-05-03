@@ -7,17 +7,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import css.rxclean.rxcleanplayground.MyApplication;
 import css.rxclean.rxcleanplayground.R;
+import css.rxclean.rxcleanplayground.data.User;
 
 /**
  * Fragment screen for {@link MainActivity}
  */
 
 public class MainFragment extends Fragment implements MainMVP.View {
+
+    @BindView(R.id.tv_main_fragment_user) TextView tvUser;
 
     @Inject
     MainPresenter mainPresenter;
@@ -62,8 +69,19 @@ public class MainFragment extends Fragment implements MainMVP.View {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+        ButterKnife.bind(this, view);
 
         return view;
+    }
+
+    @Override
+    public void showData(User user) {
+        tvUser.setText(user.login);
+    }
+
+    @Override
+    public void showError() {
+        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
     }
 
 }

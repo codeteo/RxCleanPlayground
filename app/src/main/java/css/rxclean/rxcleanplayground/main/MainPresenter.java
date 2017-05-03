@@ -1,6 +1,7 @@
 package css.rxclean.rxcleanplayground.main;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -58,17 +59,16 @@ class MainPresenter implements MainMVP.Presenter {
                 .subscribe(new Observer<User>() {
                     @Override
                     public void onCompleted() {
-                        // show completed
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        // show error
+                        view.showError();
                     }
 
                     @Override
                     public void onNext(User user) {
-                        // show data
+                        view.showData(user);
                     }
                 });
 
@@ -76,4 +76,8 @@ class MainPresenter implements MainMVP.Presenter {
 
     }
 
+    @Override
+    public void retryRequest() {
+        loadData();
+    }
 }
