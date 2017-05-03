@@ -7,8 +7,10 @@ import javax.inject.Inject;
 import css.rxclean.rxcleanplayground.data.User;
 import css.rxclean.rxcleanplayground.network.GithubService;
 import css.rxclean.rxcleanplayground.utils.schedulers.BaseSchedulerProvider;
+import css.rxclean.rxcleanplayground.utils.testHelpers.EspressoIdlingResource;
 import rx.Observer;
 import rx.Subscription;
+import rx.functions.Action0;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -52,9 +54,21 @@ class MainPresenter implements MainMVP.Presenter {
     private void loadData() {
         subscriptions.clear();
 
+        // The network request might be handled in a different thread so make sure Espresso knows
+        // that the app is busy until the response is handled.
+        EspressoIdlingResource.increment(); // App is busy until further notice
+
         Subscription subscription = githubService.getRepos()
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
+                .doOnTerminate(new Action0() {
+                   @Override
+                   public void call() {
+                       if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
+                           EspressoIdlingResource.decrement(); // Set app as idle.
+                       }
+                   }
+                })
                 .subscribe(new Observer<User>() {
                     @Override
                     public void onCompleted() {
