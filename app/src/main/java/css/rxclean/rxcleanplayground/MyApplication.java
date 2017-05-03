@@ -25,8 +25,6 @@ public class MyApplication extends Application {
                 .networkModule(new NetworkModule())
                 .build();
 
-
-        Log.i("APPLI", "onCreate META TO BUILD");
     }
 
     public static ApplicationComponent getApplicationComponent() {
