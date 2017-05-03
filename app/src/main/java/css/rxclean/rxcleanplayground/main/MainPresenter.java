@@ -43,7 +43,6 @@ class MainPresenter implements MainMVP.Presenter {
 
     @Override
     public void subscribe() {
-        loadData();
     }
 
     @Override
@@ -51,7 +50,13 @@ class MainPresenter implements MainMVP.Presenter {
         subscriptions.clear();
     }
 
-    private void loadData() {
+
+    @Override
+    public void loadData() {
+        getRepos();
+    }
+
+    private void getRepos() {
         subscriptions.clear();
 
         // The network request might be handled in a different thread so make sure Espresso knows
@@ -62,12 +67,12 @@ class MainPresenter implements MainMVP.Presenter {
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
                 .doOnTerminate(new Action0() {
-                   @Override
-                   public void call() {
-                       if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
-                           EspressoIdlingResource.decrement(); // Set app as idle.
-                       }
-                   }
+                    @Override
+                    public void call() {
+                        if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
+                            EspressoIdlingResource.decrement(); // Set app as idle.
+                        }
+                    }
                 })
                 .subscribe(new Observer<User>() {
                     @Override
@@ -92,6 +97,6 @@ class MainPresenter implements MainMVP.Presenter {
 
     @Override
     public void retryRequest() {
-        loadData();
+        getRepos();
     }
 }

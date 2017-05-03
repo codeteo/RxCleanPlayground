@@ -50,6 +50,8 @@ public class MainFragment extends Fragment implements MainMVP.View {
                     .mainModule(new MainModule(this))
                     .build()
                     .inject(this);
+
+            mainPresenter.loadData();
         }
 
     }

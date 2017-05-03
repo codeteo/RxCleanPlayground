@@ -22,6 +22,8 @@ interface MainMVP {
 
     interface Presenter extends BasePresenter {
 
+        void loadData();
+
         void retryRequest();
 
     }
